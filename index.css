@@ -1,0 +1,253 @@
+@charset "UTF-8";
+
+:root {
+    --bg: #06040b;
+    --panel: #0f0a1c;
+    --violet: #9b5cff;
+    --magenta: #ff3fa3;
+    --blade: #ff2050;
+    --text: #e9e4f7;
+    --muted: #8c80ad;
+    --line: rgba(155, 92, 255, 0.18);
+    --font-display: "Segoe UI Semibold", "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", system-ui, sans-serif;
+    --font-body: -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(155, 92, 255, 0.16), transparent 42%),
+        radial-gradient(circle at 82% 88%, rgba(255, 32, 80, 0.14), transparent 45%),
+        var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow: hidden;
+    position: relative;
+    padding: 32px 20px;
+    perspective: 1200px;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(180deg,
+            rgba(255, 255, 255, 0.018) 0px,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px,
+            transparent 3px);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+.card {
+    position: relative;
+    width: min(880px, 100%);
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    background: linear-gradient(165deg, var(--panel), #0a0614 80%);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.4),
+        0 30px 80px -30px rgba(0, 0, 0, 0.9),
+        0 0 60px -20px rgba(155, 92, 255, 0.25);
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform .15s ease-out;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--violet), transparent 35%, transparent 65%, var(--blade));
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.portrait {
+    position: relative;
+    background: #000;
+    min-height: 100%;
+}
+
+.portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.05) contrast(1.04);
+}
+
+.portrait::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 70%, var(--panel));
+}
+
+.portrait::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;
+    width: 3px;
+    background: linear-gradient(180deg, transparent, var(--blade) 35%, var(--magenta) 65%, transparent);
+    box-shadow: 0 0 14px 1px var(--blade), 0 0 28px 4px rgba(255, 32, 80, 0.35);
+    animation: blade-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes blade-pulse {
+
+    0%,
+    100% {
+        opacity: 0.65;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.info {
+    position: relative;
+    padding: 38px 38px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+}
+
+.eyebrow {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--violet);
+    opacity: 0.85;
+}
+
+h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 46px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    background: linear-gradient(100deg, #fff 10%, var(--violet) 55%, var(--magenta) 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.role {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+}
+
+.role span {
+    color: var(--blade);
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--violet), transparent 70%);
+    opacity: 0.4;
+}
+
+.links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.links li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 4px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14.5px;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid transparent;
+    transition: color .18s ease, border-color .18s ease, padding-left .18s ease;
+}
+
+.links li a:hover,
+.links li a:focus-visible {
+    color: #fff;
+    border-color: var(--magenta);
+    padding-left: 10px;
+}
+
+.links li a .glyph {
+    font-family: var(--font-display);
+    color: var(--blade);
+    font-size: 13px;
+}
+
+footer {
+    margin-top: 6px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    opacity: 0.7;
+}
+
+@media (max-width:560px) {
+    .card {
+        grid-template-columns: 1fr;
+    }
+
+    .portrait {
+        height: 280px;
+    }
+
+    .portrait::after {
+        display: none;
+    }
+
+    .info {
+        padding: 28px 24px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .portrait::after {
+        animation: none;
+    }
+}
