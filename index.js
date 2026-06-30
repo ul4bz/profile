@@ -1,3 +1,5 @@
+document.documentElement.classList.replace('no-js', 'js');
+
 const card = document.querySelector('.card');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
