@@ -53,6 +53,7 @@
 html,
 body {
     height: 100%;
+    user-select: none;
 }
 
 body {
@@ -136,6 +137,14 @@ body::before {
     height: 100%;
     object-fit: cover;
     filter: saturate(1.05) contrast(1.04);
+    pointer-events: none;
+}
+
+.portrait-cover {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    z-index: 5;
 }
 
 .portrait::before {
@@ -143,6 +152,7 @@ body::before {
     position: absolute;
     inset: 0;
     background: linear-gradient(to right, transparent 70%, var(--panel));
+    z-index: 6;
 }
 
 .portrait::after {
@@ -155,6 +165,7 @@ body::before {
     background: linear-gradient(180deg, transparent, var(--blade) 35%, var(--magenta) 65%, transparent);
     box-shadow: 0 0 14px 1px var(--blade), 0 0 28px 4px var(--blade-glow);
     animation: blade-pulse 3.2s ease-in-out infinite;
+    z-index: 7;
 }
 
 @keyframes blade-pulse {

@@ -1,3 +1,24 @@
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        return false;
+    }
+
+    if (e.ctrlKey || e.metaKey) {
+        if (e.shiftKey) {
+            if (['KeyI', 'KeyC', 'KeyJ'].includes(e.code)) {
+                e.preventDefault();
+                return false;
+            }
+        }
+        
+        if (['KeyU', 'KeyS', 'KeyP'].includes(e.code)) {
+            e.preventDefault();
+            return false;
+        }
+    }
+});
+
 document.documentElement.classList.replace('no-js', 'js');
 
 const card = document.querySelector('.card');
