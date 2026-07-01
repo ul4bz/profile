@@ -25,7 +25,7 @@ const card = document.querySelector('.card');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (card && !reduceMotion) {
-    const maxTilt = 4;
+    const maxTilt = 6;
 
     card.addEventListener('pointermove', (e) => {
         const rect = card.getBoundingClientRect();
